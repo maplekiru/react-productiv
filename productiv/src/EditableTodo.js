@@ -12,23 +12,29 @@ import TodoForm from "./TodoForm";
  * EditableTodoList -> EditableTodo -> { Todo, TodoForm }
  */
 
-function EditableTodo() {
+function EditableTodo({todo, update, remove}) {
 
+  const {id, title, description, priority} = todo;
   /** Toggle if this is being edited */
   function toggleEdit() { }
 
   /** Call remove fn passed to this. */
-  function handleDelete() { }
+  function handleDelete(evt) { 
+    evt.preventDefault();
+    remove(id);
+  }
 
   /** Edit form saved; toggle isEditing and update in ancestor. */
-  function handleSave(formData) { }
+  function handleSave(formData) { 
+    update(formData)
+  }
 
   return (
       <div className="EditableTodo">
 
                 EITHER
 
-                <TodoForm />
+                <TodoForm handleSave={handleSave} />
 
                 OR
 
@@ -45,7 +51,10 @@ function EditableTodo() {
                       Del
                     </button>
                   </div>
-                  <Todo />
+                  <Todo id={id} 
+                    title={title} 
+                    description={description} 
+                    priority={priority} />
                 </div>
 
       </div>
