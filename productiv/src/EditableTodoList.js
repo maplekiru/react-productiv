@@ -11,15 +11,19 @@ import EditableTodo from "./EditableTodo";
  * TodoApp -> EditableTodoList -> [ EditableTodo, ... ]
  */
 
-function EditableTodoList({todos, update, remove}) {
+function EditableTodoList({ todos, update, remove }) {
 
+  const editableTodos = todos.map(todo => (
+    <EditableTodo todo={todo} update={update} remove={remove} key={todo.id} />));
 
   return (
-      <div>
-        {todos.map(todo => 
-        <EditableTodo todo={todo} update={update} remove={remove} /> )} 
-      </div>
+    <div>
+      {editableTodos}
+    </div>
   );
 }
 
 export default EditableTodoList;
+
+
+//important to include key during any iteration so react knows how to identify each unique item
